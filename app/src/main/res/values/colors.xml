@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="divider_color">#CCCCCC</color>
+    <color name="list_selector_color">#E8E8E8</color>
+    <color name="button_background">#ECEFF1</color> <!-- 按鈕背景顏色，這裡使用白色 -->
+    <color name="button_text_color">#000000</color> <!-- 按鈕文字顏色，這裡使用黑色 -->
+</resources>
