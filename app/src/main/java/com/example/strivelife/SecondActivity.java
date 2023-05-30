@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.strivelife;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,18 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.widget.EditText;
-import android.content.DialogInterface;
-
 
 
 import java.util.ArrayList;

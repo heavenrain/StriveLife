@@ -1,28 +1,14 @@
-package com.example.myapplication;
+package com.example.strivelife;
 
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.content.Intent;
-import android.widget.AdapterView.OnItemClickListener;
 import android.view.Window;
-import android.text.Spanned;
-import java.util.regex.Pattern;
-import android.text.InputFilter;
 
 
 public class MainActivity extends Activity {

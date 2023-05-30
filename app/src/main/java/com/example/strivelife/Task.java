@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.strivelife;
 
 public class Task {
     String name = null;

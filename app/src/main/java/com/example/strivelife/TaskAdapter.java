@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.strivelife;
 
 import android.content.Context;
 import android.util.Log;
@@ -13,7 +13,7 @@ import android.widget.Toast;
 import android.text.TextWatcher;
 import android.text.Editable;
 import java.util.ArrayList;
-import android.text.InputType;
+
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.KeyEvent;
