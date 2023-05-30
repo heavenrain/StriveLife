@@ -39,8 +39,15 @@
         <item name="android:background">@color/white</item>
     </style>
 
-    <style name="ButtonStyle" parent="Widget.AppCompat.Button">
-        <item name="android:background">@drawable/button_background</item>
+    <style name="ButtonStyle_white" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_background_white</item>
+        <item name="android:textColor">@color/button_text_color</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
+    <style name="ButtonStyle_gray" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_background_gray</item>
         <item name="android:textColor">@color/button_text_color</item>
         <item name="android:textSize">16sp</item>
         <item name="android:padding">8dp</item>

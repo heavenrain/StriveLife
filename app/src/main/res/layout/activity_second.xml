@@ -15,6 +15,7 @@
 
     <ImageButton
         android:id="@+id/add_friend_button"
+        style="@style/ButtonStyle_gray"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_alignParentEnd="true"
@@ -53,7 +54,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="To-Do-List"
-            style="@style/ButtonStyle"
+            style="@style/ButtonStyle_white"
             android:layout_weight="1" />
 
         <Button
@@ -61,7 +62,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Friends"
-            style="@style/ButtonStyle"
+            style="@style/ButtonStyle_white"
             android:layout_weight="1" />
 
         <Button
@@ -69,7 +70,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Contest"
-            style="@style/ButtonStyle"
+            style="@style/ButtonStyle_white"
             android:layout_weight="1" />
     </LinearLayout>
 

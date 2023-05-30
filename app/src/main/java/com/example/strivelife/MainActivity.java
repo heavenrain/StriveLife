@@ -9,6 +9,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.content.Intent;
 import android.view.Window;
+import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.ListAdapter;
+import android.view.ViewGroup;
 
 
 public class MainActivity extends Activity {
@@ -18,6 +22,8 @@ public class MainActivity extends Activity {
     private static final int SECOND_ACTIVITY_REQUEST_CODE = 1;
     ArrayList<Friend> friendList;
     ArrayList<Task> taskList;
+    private ListView settingsListView;
+    private boolean isSettingsVisible = false;
 
 
     @Override
@@ -40,6 +46,20 @@ public class MainActivity extends Activity {
 
         // 顯示 Task 列表, 呈現功能
         displayTaskListView(taskList);
+
+        settingsListView = findViewById(R.id.settingsListView);
+        ImageButton settingsButton = findViewById(R.id.settings_button);
+
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isSettingsVisible) {
+                    hideSettings();
+                } else {
+                    showSettings();
+                }
+            }
+        });
 
         // 前往 Friend 列表介面的 Button
         Button btn_to_2 = (Button) findViewById(R.id.button2);
@@ -80,4 +100,27 @@ public class MainActivity extends Activity {
         listView.setAdapter(taskAdapter);
 
     }
+    private void showSettings() {
+        settingsListView.setVisibility(View.VISIBLE);
+        isSettingsVisible = true;
+
+        ArrayList<String> settingsData = new ArrayList<String>();
+        settingsData.add("更改姓名");
+        settingsData.add("更換稱號");
+        settingsData.add("更換頭像");
+
+
+        // 創建您的設定列表適配器，例如 ArrayAdapter 或自定義的適配器
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, settingsData);
+
+        // 設定設定列表的適配器
+        settingsListView.setAdapter(adapter);
+    }
+
+    private void hideSettings() {
+        settingsListView.setVisibility(View.GONE);
+        isSettingsVisible = false;
+    }
+    // 取得最寬的項目寬度
+
 }
