@@ -40,11 +40,6 @@ public class NotificationsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_notifications, container, false);
 
-        // 隐藏ContestDetailFragment（如果已经添加到FragmentManager）
-        Fragment contestDetailFragment = requireActivity().getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
-        if (contestDetailFragment != null) {
-            requireActivity().getSupportFragmentManager().beginTransaction().hide(contestDetailFragment).commit();
-        }
 
         // 按下新增比賽按鈕
         Button new_game = view.findViewById(R.id.new_game);
@@ -73,13 +68,12 @@ public class NotificationsFragment extends Fragment {
             @Override
             public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
                 // 处理列表项的点击事件
-                // 根据需要执行操作
                 View childView = rv.findChildViewUnder(e.getX(), e.getY());
                 if (childView != null && e.getAction() == MotionEvent.ACTION_UP) {
                     int position = rv.getChildAdapterPosition(childView);
                     String selectedItem = dataList.get(position);
-//                    Toast.makeText(getActivity(), selectedItem, Toast.LENGTH_SHORT).show();
 
+                    // 進入DETAIL ACTIVITY
                     Intent intent = new Intent(getActivity(), ContestDetailActivity.class);
                     intent.putExtra("title", selectedItem);
                     startActivity(intent);
@@ -102,14 +96,10 @@ public class NotificationsFragment extends Fragment {
     }
 
 
-
-
-
     // 顯示新建比賽頁面函數
     private void showInputDialog() {
         // 创建AlertDialog的Builder对象
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        //        builder.setTitle("输入四个文本字符串");
 
         // 创建一个布局视图用于AlertDialog中的内容
         LayoutInflater inflater = getLayoutInflater();
@@ -133,6 +123,14 @@ public class NotificationsFragment extends Fragment {
                 String text4 = contest_time.getText().toString();
 
                 // 执行相应的操作，例如将文本字符串显示在TextView上或进行其他处理
+                // 要求後端 1建立新競賽 & 2用戶和該競賽的ATTENDANCE
+
+
+                // 新增比賽到列表中(IF條件為如果建立成功)
+                if(true) {
+                    dataList.add(text1);
+                    adapter.updateData(dataList);
+                }
             }
         });
 
@@ -152,7 +150,8 @@ public class NotificationsFragment extends Fragment {
     }
 
 
-    // 生成数据列表的方法
+    // 連接後端生成用戶所有比賽数据列表的方法
+    @NonNull
     private List<String> generateDataList() {
         List<String> dataList = new ArrayList<>();
         // 添加数据项到列表中
