@@ -4,7 +4,10 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ListView;
 
+import com.example.strivelifeapplication.ui.home.Task;
+import com.example.strivelifeapplication.ui.home.TaskAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -16,6 +19,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.strivelifeapplication.databinding.ActivityMainBinding;
 
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -25,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE); // 隐藏标题栏
+//        requestWindowFeature(Window.FEATURE_NO_TITLE); // 隐藏标题栏
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

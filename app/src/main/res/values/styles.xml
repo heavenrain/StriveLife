@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <!-- 定义简约风格的样式 -->
     <style name="SimpleStyle">
         <!-- 文本颜色为黑色 -->
