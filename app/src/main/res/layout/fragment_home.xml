@@ -23,7 +23,7 @@
                 android:id="@+id/avatar"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/tt"
+                android:src="@drawable/sleep"
                 android:background="@drawable/circle_background" />
 
             <TextView
