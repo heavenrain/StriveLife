@@ -25,7 +25,7 @@ public class DashboardViewModel extends ViewModel {
         return friendList;
     }
 
-    public void addFriend(Friend friend) {
-        friendList.add(friend);
+    public void updataFriendList(ArrayList<Friend> friendlist) {
+        this.friendList = friendlist;
     }
 }

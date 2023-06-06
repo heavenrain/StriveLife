@@ -66,7 +66,8 @@ public class DashboardFragment extends Fragment {
                 dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener((c -> {
                     int id = Integer.parseInt(editNumber.getText().toString());
                     Friend friend = new Friend(id,"無名"+Integer.toString(id));
-                    dashboardViewModel.addFriend(friend);
+                    friendList.add(friend);
+                    dashboardViewModel.updataFriendList(friendList);
                     //create an ArrayAdaptar from the String Array
                     friendAdapter = new FriendAdapter(requireContext(), R.layout.friend_info, friendList);
                     ListView listView = root.findViewById(R.id.listView2);

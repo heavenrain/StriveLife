@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:text="Name" />
+        android:text="Name"
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/task1_group"
@@ -20,7 +21,8 @@
         android:layout_toRightOf="@+id/task1_name"
         android:layout_marginLeft="16dp"
         android:layout_centerVertical="true"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textColor="@color/black" />
 
     <EditText
         android:id="@+id/task1_amount"

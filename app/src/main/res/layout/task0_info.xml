@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:text="TaskName" />
+        android:text="TaskName"
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/task0_group"
@@ -20,7 +21,8 @@
         android:layout_toRightOf="@+id/task0_name"
         android:layout_marginLeft="16dp"
         android:layout_centerVertical="true"
-        android:text="GroupName" />
+        android:text="GroupName"
+        android:textColor="@color/black" />
 
     <CheckBox
         android:id="@+id/task0_checkbox"
