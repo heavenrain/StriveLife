@@ -12,7 +12,7 @@ import com.example.strivelifeapplication.R;
 
 import java.util.List;
 
-// 顯示比賽列表
+// 顯示列表
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<String> dataList;
 
@@ -49,4 +49,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             textView.setText(data);
         }
     }
+
+    public void updateData(List<String> newData) {
+//        dataList.clear(); // 清空原有数据
+//        dataList.addAll(newData); // 添加新数据
+        notifyDataSetChanged(); // 通知适配器数据已更新
+    }
+
 }
