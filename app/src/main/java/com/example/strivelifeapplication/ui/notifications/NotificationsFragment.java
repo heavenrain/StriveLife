@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.strivelifeapplication.ContestDetailActivity;
 import com.example.strivelifeapplication.R;
 import com.example.strivelifeapplication.databinding.FragmentNotificationsBinding;
 
@@ -77,14 +78,11 @@ public class NotificationsFragment extends Fragment {
                 if (childView != null && e.getAction() == MotionEvent.ACTION_UP) {
                     int position = rv.getChildAdapterPosition(childView);
                     String selectedItem = dataList.get(position);
-                    Toast.makeText(getActivity(), selectedItem, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), selectedItem, Toast.LENGTH_SHORT).show();
 
-                    FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragmentContainer, ContestDetailFragment.newInstance(selectedItem));
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
-
+                    Intent intent = new Intent(getActivity(), ContestDetailActivity.class);
+                    intent.putExtra("title", selectedItem);
+                    startActivity(intent);
 
                 }
                 return false;
