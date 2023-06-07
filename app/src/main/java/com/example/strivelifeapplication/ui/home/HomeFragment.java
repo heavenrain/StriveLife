@@ -56,6 +56,11 @@ public class HomeFragment extends Fragment {
     ImageView avatar;  // Replace with your ImageView reference
     String Name;
     String contestName;
+    int contestType;
+    String deadline;
+    int expected_amount;
+    int award_score;
+    String award_avatar;
 
 
 
@@ -93,9 +98,9 @@ public class HomeFragment extends Fragment {
         if (init_flag){
             homeViewModel.setMyName("marow");
             Name = homeViewModel.getMyName();
-//            GetAttendedContestManager AttendedContestManager = new GetAttendedContestManager();
-//            JSONArray FriendData = AttendedContestManager.getAttendedContest(Name);
-//
+            GetAttendedContestManager AttendedContestManager = new GetAttendedContestManager();
+            JSONArray FriendData = AttendedContestManager.getAttendedContest(Name);
+
 //            for (int i = 0; i < FriendData.length(); i++) {
 //                // 获取当前数组元素（一个 JSONObject）
 //                JSONObject dataObject = null;
@@ -109,13 +114,15 @@ public class HomeFragment extends Fragment {
 //                String ContestName = null;
 //                try {
 //                    contestName = dataObject.getString("contest_name");
+//                    contestType = Integer.parseInt(dataObject.getString("type"));
+////                    contestType = dataObject.getString("type");
 //                } catch (JSONException e) {
 //                    throw new RuntimeException(e);
 //                }
 //
 //                // 输出 ContestName
 //                Log.v("groupName: " , contestName);
-            //}
+//            }
 
             taskList = new ArrayList<>();
             Task task = new Task("再睡五分鐘", 1, false, 0, null);
