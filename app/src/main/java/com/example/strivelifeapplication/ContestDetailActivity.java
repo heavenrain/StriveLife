@@ -50,7 +50,7 @@ public class ContestDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ContestDetailActivity.this);
-                builder.setTitle("输入好友名稱1");
+                builder.setTitle("输入好友名稱");
 
                 // 创建一个 EditText 作为对话框的内容
                 final EditText inputEditText = new EditText(ContestDetailActivity.this);
