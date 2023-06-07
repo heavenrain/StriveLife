@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">StriveLife Application</string>
+    <string name="app_name">StriveLife</string>
     <string name="title_home">To_Do-List</string>
     <string name="title_dashboard">我的好友</string>
     <string name="title_notifications">我的比賽</string>

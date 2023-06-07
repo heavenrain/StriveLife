@@ -20,13 +20,37 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.strivelifeapplication.databinding.ActivityMainBinding;
 
-import java.util.ArrayList;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity implements LoginDialog.ExampleDialogListener{
 
     private ActivityMainBinding binding;
-    String User_name, User_pass;
+    private EditText editTextUsername;
+    private EditText editTextPassword;
+    TextView textview; // 把視圖的元件宣告成全域變數
+    String result; // 儲存資料用的字串
+    String User_name, User_pass, login_User_name, login_User_pass;
+    Button btn_login, btn_register;
+    private final static String TAG = "HTTPURLCONNECTION test";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
