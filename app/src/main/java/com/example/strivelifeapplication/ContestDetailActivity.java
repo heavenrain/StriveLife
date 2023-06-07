@@ -48,8 +48,8 @@ public class ContestDetailActivity extends AppCompatActivity {
 
         // 设置布局管理器
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        // 調整間隙
+        recyclerView.setLayoutManager(layoutManager);
+        // 调整间隙
         int spacing = getResources().getDimensionPixelSize(R.dimen.item_spacing);
         recyclerView.addItemDecoration(new ChallengerDecoration(spacing));
 
@@ -59,7 +59,7 @@ public class ContestDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ContestDetailActivity.this);
-                builder.setTitle("输入好友名稱");
+                builder.setTitle("輸入好友名稱");
 
                 // 创建一个 EditText 作为对话框的内容
                 final EditText inputEditText = new EditText(ContestDetailActivity.this);
