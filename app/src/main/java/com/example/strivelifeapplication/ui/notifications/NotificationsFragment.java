@@ -84,8 +84,11 @@ public class NotificationsFragment extends Fragment {
         // 初始化RecyclerView
         recyclerView = view.findViewById(R.id.recyclerView_Contest);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        // 调整间隙
+        int spacing = getResources().getDimensionPixelSize(R.dimen.item_spacing);
+        recyclerView.addItemDecoration(new ChallengerDecoration(spacing));
 
-//         初始化适配器
+        // 初始化适配器
         adapter = new MyAdapter(dataList);
         recyclerView.setAdapter(adapter);
 
