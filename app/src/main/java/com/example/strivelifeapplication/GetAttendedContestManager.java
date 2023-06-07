@@ -88,6 +88,7 @@ public class GetAttendedContestManager {
                         JSONObject dataObject = dataArray.getJSONObject(i);
 
                         // 从 dataObject 中获取 participant_name 和 score 值
+                        String contest_name = dataObject.getString("contest_name");
                         String deadline = dataObject.getString("deadline");
                         String award_name = dataObject.getString("award_name");
                         String award_avatar = dataObject.getString("award_avatar");
@@ -97,6 +98,7 @@ public class GetAttendedContestManager {
                         int award_score = dataObject.getInt("award_score");
 
                         // 输出 participant_name 和 score
+                        Log.v("contest_name: " , ""+ contest_name);
                         Log.v("type: " , ""+ type);
                         Log.v("deadline: " , ""+ deadline);
                         Log.v("expected_amount: " , ""+ expected_amount);
