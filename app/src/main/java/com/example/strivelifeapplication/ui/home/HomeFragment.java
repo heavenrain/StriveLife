@@ -256,7 +256,7 @@ public class HomeFragment extends Fragment {
             return imageView;
         }
     }
-    private int AvatarNameToId(String Name) {
+    public int AvatarNameToId(String Name) {
         // Get the resource ID of the drawable using its name
         int resourceId = getResources().getIdentifier(Name, "drawable", requireContext().getPackageName());
         return resourceId;

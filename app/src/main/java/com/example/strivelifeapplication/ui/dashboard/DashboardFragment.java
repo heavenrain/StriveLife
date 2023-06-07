@@ -75,7 +75,18 @@ public class DashboardFragment extends Fragment {
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
-                Friend friend = new Friend(friendname, "無");
+                String avatar = "無";
+                if (friendname.equals("sally")){
+                    avatar = "water";
+                }
+                else if(friendname.equals("yicheng")){
+                    avatar = "muscle";
+                }
+                else{
+                    avatar = "hero";
+                }
+
+                Friend friend = new Friend(friendname, avatar);
                 friendList.add(friend);
             }
             dashboardViewModel.updataFriendList(friendList);
@@ -112,6 +123,16 @@ public class DashboardFragment extends Fragment {
                 // "確定": 新增好友至 Friend 列表
                 dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener((c -> {
                     String friendName = editFriendName.getText().toString();
+                    String avatar = "無";
+                    if (friendName.equals("sally")){
+                        avatar = "water";
+                    }
+                    else if(friendName.equals("yicheng")){
+                        avatar = "muscle";
+                    }
+                    else{
+                        avatar = "hero";
+                    }
                     add_Friend("marow", friendName);
                     if (result.equals("Friend is not a gammer")){
                         Toast.makeText(requireContext(), result, Toast.LENGTH_SHORT).show();
@@ -119,7 +140,7 @@ public class DashboardFragment extends Fragment {
                     else{
                         add_Friend(friendName, "marow");
                         Log.d("reponse", ""+result);
-                        Friend friend = new Friend(friendName, "無");
+                        Friend friend = new Friend(friendName, avatar);
                         friendList.add(friend);
                         dashboardViewModel.updataFriendList(friendList);
                         //create an ArrayAdaptar from the String Array
