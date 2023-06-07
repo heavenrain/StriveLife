@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/text_how_much"
             android:layout_marginStart="20dp"
-            android:hint="请输入1達成量"
+            android:hint="請輸入達成量"
             android:textSize="16sp" />
 
         <EditText
