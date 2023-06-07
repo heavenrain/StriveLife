@@ -45,6 +45,8 @@ public class HomeFragment extends Fragment {
     private ImageView selectedImageView;
     HomeViewModel homeViewModel;
     View root;
+    boolean change_flag = false;
+    ImageView avatar;  // Replace with your ImageView reference
 
 
 
@@ -60,10 +62,10 @@ public class HomeFragment extends Fragment {
         ImageButton settingsButton = root.findViewById(R.id.settings_button);
 
         imageList = new ArrayList<>();
-        imageList.add(R.drawable.water);
-        imageList.add(R.drawable.sleep);
-        imageList.add(R.drawable.muscle);
-        imageList.add(R.drawable.hero);
+        imageList.add(AvatarNameToId("water"));
+        imageList.add(AvatarNameToId("sleep"));
+        imageList.add(AvatarNameToId("muscle"));
+        imageList.add(AvatarNameToId("hero"));
 
 
         settingsButton.setOnClickListener(new View.OnClickListener() {
@@ -79,15 +81,27 @@ public class HomeFragment extends Fragment {
 
         ListView listView = root.findViewById(R.id.listView1);
 
-        taskList = new ArrayList<>();
-        Task task = new Task("睡覺", "再睡五分鐘", 2, false, 0, null);
-        taskList.add(task);
-        task = new Task("運動", "健身大佬", 0, false, 0, null);
-        taskList.add(task);
-        task = new Task("喝水", "台南缺水", 1, false, 2000, null);
-        taskList.add(task);
+        if (!change_flag){
+            taskList = new ArrayList<>();
+            Task task = new Task("再睡五分鐘", 1, false, 0, null);
+            taskList.add(task);
+            task = new Task("健身大佬", 0, false, 0, null);
+            taskList.add(task);
+            task = new Task( "台南缺水", 1, false, 2000, null);
+            taskList.add(task);
+            change_flag = true;
+            avatar = root.findViewById(R.id.avatar);  // Replace with your ImageView reference
+            avatar.setImageResource(AvatarNameToId("water"));
+        }
+        else {
+            taskList = homeViewModel.getTaskList();
+            avatar = root.findViewById(R.id.avatar);
+            avatar.setImageResource(AvatarNameToId(homeViewModel.getAvatarName()));
+            Log.d("好累", homeViewModel.getAvatarName());
+        }
 
-        taskAdapter = new TaskAdapter(requireContext(), taskList);
+
+        taskAdapter = new TaskAdapter(requireContext(), taskList, homeViewModel);
         listView.setAdapter(taskAdapter);
 
         final TextView textView = binding.textHome;
@@ -99,6 +113,10 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        if (taskAdapter != null) {
+            ArrayList<Task> updatedTaskList = taskAdapter.getTaskList();
+            homeViewModel.updataTaskList(updatedTaskList);
+        }
         binding = null;
     }
 
@@ -150,9 +168,12 @@ public class HomeFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 int selectedImageResId = imageList.get(position);
-                homeViewModel.setSelectedAvatarResId(selectedImageResId);
                 selectedImageView.setImageResource(selectedImageResId);
-                Log.d("圖", String.valueOf(selectedImageResId));
+
+                // 儲存avatar圖片的名稱到HomeViewModel
+                String avatarName = AvatarIdToName(selectedImageResId);
+                homeViewModel.setAvatarName(avatarName);
+                Log.d("圖", String.valueOf(avatarName));
                 imagePickerDialog.dismiss();
             }
         });
@@ -199,5 +220,15 @@ public class HomeFragment extends Fragment {
 
             return imageView;
         }
+    }
+    private int AvatarNameToId(String Name) {
+        // Get the resource ID of the drawable using its name
+        int resourceId = getResources().getIdentifier(Name, "drawable", requireContext().getPackageName());
+        return resourceId;
+    }
+    private String AvatarIdToName(int resourceId) {
+        // Get the resource name of the drawable using its ID
+        String resourceName = getResources().getResourceEntryName(resourceId);
+        return resourceName;
     }
 }

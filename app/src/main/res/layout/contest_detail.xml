@@ -9,19 +9,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="65dp"
+        tools:layout_editor_absoluteY="331dp">
+
         <TextView
             android:id="@+id/textView_contest_name"
+            style="@style/MinimalisticStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
-            style="@style/MinimalisticStyle"/>
+            android:textSize="30sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_player"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"/>
     </LinearLayout>
 
     <Button

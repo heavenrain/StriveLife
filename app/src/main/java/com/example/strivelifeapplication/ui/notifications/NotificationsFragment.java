@@ -27,6 +27,8 @@ import java.util.List;
 
 import androidx.fragment.app.FragmentManager;
 
+import org.json.JSONArray;
+
 public class NotificationsFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -96,7 +98,7 @@ public class NotificationsFragment extends Fragment {
     }
 
 
-    // 顯示新建比賽頁面函數
+    // 顯示新建比賽頁面
     private void showInputDialog() {
         // 创建AlertDialog的Builder对象
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -112,6 +114,19 @@ public class NotificationsFragment extends Fragment {
         EditText contest_how_much = dialogView.findViewById(R.id.contest_how_much);
         EditText contest_time = dialogView.findViewById(R.id.contest_time);
 
+        // 選擇頭像獎勵按鈕
+        Button extraButton = dialogView.findViewById(R.id.button_new_aword);
+
+        // 设置頭像按钮的点击事件
+        extraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 在这里处理頭像按钮的点击事件
+                //!@#$
+                Toast.makeText(getContext(), "頭像按鈕", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         // 设置对话框的积极按钮（例如确定按钮）
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
@@ -124,13 +139,30 @@ public class NotificationsFragment extends Fragment {
 
                 // 执行相应的操作，例如将文本字符串显示在TextView上或进行其他处理
                 // 要求後端 1建立新競賽 & 2用戶和該競賽的ATTENDANCE
-
-
-                // 新增比賽到列表中(IF條件為如果建立成功)
-                if(true) {
-                    dataList.add(text1);
-                    adapter.updateData(dataList);
-                }
+//                !@#$
+//                int type = 0, expected_amount = 0;
+//                String deadline = "06:00:00";
+//                String goal = "";
+//                if(!"".equals(text1)){
+//                    if (!"".equals(text4)) {deadline = text4;};
+//                    if (!"".equals(text2)) {goal = text2;}
+//                    if (!"".equals(text3)){
+//                        type = 1;
+//                        expected_amount = Integer.parseInt(text3);
+//                    }
+//                    result = add_Contest(text1, type, deadline, expected_amount, "King", 5, "test.png");
+//                } else Toast.makeText(getContext(), "請輸入比賽名稱", Toast.LENGTH_SHORT).show();
+//
+//
+//                //  2用戶和該競賽的ATTENDANCE
+//                if(result) {
+//                    add_Attendance(使用者名稱, text1, 0);
+//
+//                    //新增比賽到本地列表中(IF條件為如果建立成功)
+//                    dataList.add(text1);
+//                    adapter.updateData(dataList);
+//                }
+//                !@#$
             }
         });
 
@@ -155,6 +187,11 @@ public class NotificationsFragment extends Fragment {
     private List<String> generateDataList() {
         List<String> dataList = new ArrayList<>();
         // 添加数据项到列表中
+//        JSONArray data= getAttendedContest(使用者名稱);
+//        !@#$
+//        把JSONArray dataArray的比賽名稱加入dataList
+
+        //!@#$
         dataList.add("香菇湯意麵");
         dataList.add("滷肉飯");
         dataList.add("餛飩板條");

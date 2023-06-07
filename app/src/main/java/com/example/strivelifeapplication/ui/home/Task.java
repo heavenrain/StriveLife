@@ -2,7 +2,7 @@ package com.example.strivelifeapplication.ui.home;
 
 public class Task {
     String name = null;
-    String group = null;
+
     int type = 0;
     boolean selected = false;
     int amount = 0;
@@ -20,10 +20,9 @@ public class Task {
     // amount: 任務規定完成的量
     // deadline: 任務規定完成的時間, e.g. "2023/05/25 15:05:01";
     // ====================
-    public Task(String name, String group, int type, boolean selected, int expected_amount, String deadline) {
+    public Task(String name, int type, boolean selected, int expected_amount, String deadline) {
         super();
         this.name = name;
-        this.group = group;
         this.type = type;
         this.selected = selected;
         this.amount = 0;
@@ -39,10 +38,7 @@ public class Task {
     public void setName(String name) {
         this.name = name;
     }
-    public String getGroup() {
-        return group;
-    }
-    public void setGroup(String group) {this.group = group;}
+
     public int getType() {
         return type;
     }
