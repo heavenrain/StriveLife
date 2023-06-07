@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -38,7 +40,7 @@ public class DashboardFragment extends Fragment {
     private FragmentDashboardBinding binding;
     private ArrayList<Friend> friendList = new ArrayList<>();
     FriendAdapter friendAdapter = null;
-    String result;
+    String result = null;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -68,7 +70,7 @@ public class DashboardFragment extends Fragment {
 
                 // 設置"輸入好友 id 視窗"上的功能
                 // 包含"確定"、"取消"、"輸入 id 窗口"
-                EditText editNumber = v.findViewById(R.id.editNumber);
+                EditText editFriendName = v.findViewById(R.id.editFriendName);
                 alertDialog.setPositiveButton("確定", ((dialog, which) -> {}));
                 alertDialog.setNeutralButton("取消",((dialog, which) -> {}));
 
@@ -79,17 +81,23 @@ public class DashboardFragment extends Fragment {
                 // 實作"輸入好友 id 視窗"上的功能
                 // "確定": 新增好友至 Friend 列表
                 dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener((c -> {
-                    String id = editNumber.getText().toString();
-                    Friend friend = new Friend("無名"+id, "無");
-                    friendList.add(friend);
-                    dashboardViewModel.updataFriendList(friendList);
-                    //create an ArrayAdaptar from the String Array
-                    friendAdapter = new FriendAdapter(requireContext(), R.layout.friend_info, friendList);
-                    ListView listView = root.findViewById(R.id.listView2);
-                    // Assign adapter to ListView
-                    listView.setAdapter(friendAdapter);
-
-                    add_Friend("marow", id);
+                    String friendName = editFriendName.getText().toString();
+                    add_Friend("marow", friendName);
+                    if (result.equals("Friend is not a gammer")){
+                        Toast.makeText(requireContext(), result, Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        add_Friend(friendName, "marow");
+                        Log.d("reponse", ""+result);
+                        Friend friend = new Friend(friendName, "無");
+                        friendList.add(friend);
+                        dashboardViewModel.updataFriendList(friendList);
+                        //create an ArrayAdaptar from the String Array
+                        friendAdapter = new FriendAdapter(requireContext(), R.layout.friend_info, friendList);
+                        ListView listView = root.findViewById(R.id.listView2);
+                        // Assign adapter to ListView
+                        listView.setAdapter(friendAdapter);
+                    }
                     dialog.dismiss();
                 }));
                 // "取消: 離開並返回 Friend 介面
@@ -174,19 +182,13 @@ public class DashboardFragment extends Fragment {
                 int responseCode = connection.getResponseCode();
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     // 如果 HTTP 回傳狀態是 OK ，而不是 Error
-                    InputStream inputStream =
-                            connection.getInputStream();
-                    // 取得輸入串流
-                    BufferedReader bufReader = new BufferedReader(new InputStreamReader(inputStream, "utf-8"), 8);
-                    // 讀取輸入串流的資料
-                    String box = ""; // 宣告存放用字串
-                    String line = null; // 宣告讀取用的字串
-                    while((line = bufReader.readLine()) != null) {
-                        box += line + "\n";
-                        // 每當讀取出一列，就加到存放字串後面
-                    }
-                    inputStream.close(); // 關閉輸入串流
-                    result = box; // 把存放用字串放到全域變數
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    String response = bufferedReader.readLine();
+
+                    // 将响应内容转换为 JSON 对象
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("status");
+                    result = status;
                     Log.d("HTTP_output", "output!");
                     Log.d("SUCCESS result", "" +": "+result);
                 } else {
@@ -209,6 +211,11 @@ public class DashboardFragment extends Fragment {
         addFriend.setParams(my_name, friend_name);
         Thread thread = new Thread(addFriend);
         thread.start();
+        try {
+            thread.join(); // Wait for the thread to complete
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return result;
     };
 

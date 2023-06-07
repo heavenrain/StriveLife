@@ -14,7 +14,7 @@ public class HomeViewModel extends ViewModel {
     private final MutableLiveData<String> mText;
     private ArrayList<Task> taskList = new ArrayList<>();
     String myName;
-    private MutableLiveData<Integer> selectedAvatarResId = new MutableLiveData<>();
+    private String avatarName = "";
 
 
     public HomeViewModel() {
@@ -40,10 +40,11 @@ public class HomeViewModel extends ViewModel {
     public String getMyName() {
         return myName;
     }
-    public void setSelectedAvatarResId(int resId) {
-        selectedAvatarResId.setValue(resId);
+    public String getAvatarName() {
+        return avatarName;
     }
-    public LiveData<Integer> getSelectedAvatarResId() {
-        return selectedAvatarResId;
+
+    public void setAvatarName(String name) {
+        this.avatarName = name;
     }
 }

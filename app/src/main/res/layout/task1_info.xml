@@ -15,7 +15,7 @@
         android:textColor="@color/black" />
 
     <TextView
-        android:id="@+id/task1_group"
+        android:id="@+id/task1_condition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/task1_name"
