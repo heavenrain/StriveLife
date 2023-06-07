@@ -139,13 +139,30 @@ public class NotificationsFragment extends Fragment {
 
                 // 执行相应的操作，例如将文本字符串显示在TextView上或进行其他处理
                 // 要求後端 1建立新競賽 & 2用戶和該競賽的ATTENDANCE
-
-
-                // 新增比賽到列表中(IF條件為如果建立成功)
-                if(true) {
-                    dataList.add(text1);
-                    adapter.updateData(dataList);
-                }
+//                !@#$
+//                int type = 0, expected_amount = 0;
+//                String deadline = "06:00:00";
+//                String goal = "";
+//                if(!"".equals(text1)){
+//                    if (!"".equals(text4)) {deadline = text4;};
+//                    if (!"".equals(text2)) {goal = text2;}
+//                    if (!"".equals(text3)){
+//                        type = 1;
+//                        expected_amount = Integer.parseInt(text3);
+//                    }
+//                    result = add_Contest(text1, type, deadline, expected_amount, "King", 5, "test.png");
+//                } else Toast.makeText(getContext(), "請輸入比賽名稱", Toast.LENGTH_SHORT).show();
+//
+//
+//                //  2用戶和該競賽的ATTENDANCE
+//                if(result) {
+//                    add_Attendance(使用者名稱, text1, 0);
+//
+//                    //新增比賽到本地列表中(IF條件為如果建立成功)
+//                    dataList.add(text1);
+//                    adapter.updateData(dataList);
+//                }
+//                !@#$
             }
         });
 
@@ -170,9 +187,11 @@ public class NotificationsFragment extends Fragment {
     private List<String> generateDataList() {
         List<String> dataList = new ArrayList<>();
         // 添加数据项到列表中
-//        JSONArray data= getAttendedContest("sally");//
-//        @NonNull
-//                @NonNull
+//        JSONArray data= getAttendedContest(使用者名稱);
+//        !@#$
+//        把JSONArray dataArray的比賽名稱加入dataList
+
+        //!@#$
         dataList.add("香菇湯意麵");
         dataList.add("滷肉飯");
         dataList.add("餛飩板條");

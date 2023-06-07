@@ -17,12 +17,15 @@ import com.example.strivelifeapplication.ui.notifications.ChallengerAdapter;
 import com.example.strivelifeapplication.ui.notifications.ChallengerDecoration;
 import com.example.strivelifeapplication.ui.notifications.MyAdapter;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ContestDetailActivity extends AppCompatActivity {
 
     private TextView titleTextView;
+    private String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +34,7 @@ public class ContestDetailActivity extends AppCompatActivity {
 
         // 获取标题TextView并设置文本内容
         titleTextView = findViewById(R.id.textView_contest_name);
-        String title = getIntent().getStringExtra("title");
+        title = getIntent().getStringExtra("title");
         titleTextView.setText(title);
 
         // 声明并初始化RecyclerView
@@ -68,13 +71,16 @@ public class ContestDetailActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         String userInput = inputEditText.getText().toString();
                         // 调用后端 API 建立ATTDENCE
-
-
-                        // 新增好友到比賽中(IF條件為如果建立成功)
-                        if(true) {
-                            dataList.add(new ChallengerItem(userInput, 0));
-                            adapter.updateData(dataList);
-                        }
+                        //!@#$
+//                        result =  add_Attendance("sally", "再睡5分鐘", 0);
+//
+//
+//                        // 新增好友到比賽中(IF條件為如果建立成功)
+//                        if(result==成功) {
+//                            dataList.add(new ChallengerItem(userInput, 0));
+//                            adapter.updateData(dataList);
+//                        }
+                        //!@#$
                     }
                 });
 
@@ -100,6 +106,12 @@ public class ContestDetailActivity extends AppCompatActivity {
     private List<ChallengerItem> generateChallengerList() {
         List<ChallengerItem> challengerItemList = new ArrayList<>();
         // 添加数据项到列表中
+//        !@#$
+//        JSONObject dataObject = getContestParticipant(title);
+//        把dataObject資料寫入challengerItemList
+//        !@#$
+
+
         challengerItemList.add(new ChallengerItem("雷諾哈特", 10));
         challengerItemList.add(new ChallengerItem("萊西哈特", 15));
         challengerItemList.add(new ChallengerItem("萊特哈特", 8));
