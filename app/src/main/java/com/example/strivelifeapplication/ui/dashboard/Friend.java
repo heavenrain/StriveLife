@@ -3,15 +3,16 @@ package com.example.strivelifeapplication.ui.dashboard;
 public class Friend {
 
     String name = null;
-    int id = 0;
+    String avatar = null;
 
     // === Friend 屬性說明 ===
     // id: 好友id
     // nane: 好友id
     // ====================
-    public Friend(int id, String name) {
+    public Friend(String name, String avatar) {
         super();
         this.name = name;
+        this.avatar = avatar;
     }
 
     public String getName() {
