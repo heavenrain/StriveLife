@@ -13,19 +13,25 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.strivelifeapplication.ui.ChallengerItem;
+import com.example.strivelifeapplication.ui.home.Task;
 import com.example.strivelifeapplication.ui.notifications.ChallengerAdapter;
 import com.example.strivelifeapplication.ui.notifications.ChallengerDecoration;
 import com.example.strivelifeapplication.ui.notifications.MyAdapter;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import android.util.Log;
 
 public class ContestDetailActivity extends AppCompatActivity {
 
     private TextView titleTextView;
     private String title;
+    String ParticipantName;
+    int score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +41,7 @@ public class ContestDetailActivity extends AppCompatActivity {
         // 获取标题TextView并设置文本内容
         titleTextView = findViewById(R.id.textView_contest_name);
         title = getIntent().getStringExtra("title");
+        Log.d("title",title);
         titleTextView.setText(title);
 
         // 声明并初始化RecyclerView
@@ -66,11 +73,15 @@ public class ContestDetailActivity extends AppCompatActivity {
                 builder.setView(inputEditText);
 
                 // 添加确认按钮
-                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("確認", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String userInput = inputEditText.getText().toString();
                         // 调用后端 API 建立ATTDENCE
+                        AddAttendanceManager addAttendanceManager = new AddAttendanceManager();
+                        String result = addAttendanceManager.add_Attendance(userInput, title, 0);
+                        dataList.add(new ChallengerItem(userInput, 0));
+                        adapter.updateData(dataList);
                         //!@#$
 //                        result =  add_Attendance("sally", "再睡5分鐘", 0);
 //
@@ -106,6 +117,28 @@ public class ContestDetailActivity extends AppCompatActivity {
     private List<ChallengerItem> generateChallengerList() {
         List<ChallengerItem> challengerItemList = new ArrayList<>();
         // 添加数据项到列表中
+        GetContestParticipantManager ContestParticipantManager = new GetContestParticipantManager();
+        JSONArray ParticipantData = ContestParticipantManager.getContestParticipant(title);
+        for (int i = 0; i < ParticipantData.length(); i++) {
+            // 获取当前数组元素（一个 JSONObject）
+            JSONObject dataObject = null;
+            try {
+                dataObject = ParticipantData.getJSONObject(i);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+
+            // 从 dataObject 中获取 participant_name 和 score 值
+            try {
+                ParticipantName = dataObject.getString("participant_name");
+                score = Integer.parseInt(dataObject.getString("score"));
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+            ChallengerItem item = new ChallengerItem(ParticipantName, score);
+            challengerItemList.add(item);
+
+        }
 //        !@#$
 //        JSONObject dataObject = getContestParticipant(title);
 //        把dataObject資料寫入challengerItemList
@@ -113,11 +146,11 @@ public class ContestDetailActivity extends AppCompatActivity {
 
 
 //        challengerItemList.add(new ChallengerItem("雷諾哈特", 10));
-        challengerItemList.add(new ChallengerItem("萊西哈特", 15));
-        challengerItemList.add(new ChallengerItem("萊特哈特", 8));
-        challengerItemList.add(new ChallengerItem("梅露", 12));
-        challengerItemList.add(new ChallengerItem("赫夫", 5));
-        challengerItemList.add(new ChallengerItem("賽壬", 20));
+//        challengerItemList.add(new ChallengerItem("萊西哈特", 15));
+//        challengerItemList.add(new ChallengerItem("萊特哈特", 8));
+//        challengerItemList.add(new ChallengerItem("梅露", 12));
+//        challengerItemList.add(new ChallengerItem("赫夫", 5));
+//        challengerItemList.add(new ChallengerItem("賽壬", 20));
         return challengerItemList;
     }
 

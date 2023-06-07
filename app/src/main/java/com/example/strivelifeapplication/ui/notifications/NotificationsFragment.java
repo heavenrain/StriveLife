@@ -16,6 +16,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -23,6 +24,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.strivelifeapplication.AddAttendanceManager;
+import com.example.strivelifeapplication.AddContestManager;
 import com.example.strivelifeapplication.ContestDetailActivity;
 import com.example.strivelifeapplication.GetAttendedContestManager;
 import com.example.strivelifeapplication.R;
@@ -148,7 +151,7 @@ public class NotificationsFragment extends Fragment {
         });
 
         // 设置对话框的积极按钮（例如确定按钮）
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("確認", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // 在这里处理确定按钮的点击事件
@@ -159,6 +162,22 @@ public class NotificationsFragment extends Fragment {
 
                 // 执行相应的操作，例如将文本字符串显示在TextView上或进行其他处理
                 // 要求後端 1建立新競賽 & 2用戶和該競賽的ATTENDANCE
+                AddContestManager addContestManager = new AddContestManager();
+                if (text3.equals("")){
+                    addContestManager.add_Contest(text1,0,text4, Integer.parseInt(text3),"隨便",
+                            Integer.parseInt(text2),"water");
+                    dataList.add(text1);
+                    adapter.updateData(dataList);
+                }
+                else {
+                    addContestManager.add_Contest(text1,1,text4, Integer.parseInt(text3),"隨便",
+                            Integer.parseInt(text2),"water");
+                    dataList.add(text1);
+                    adapter.updateData(dataList);
+                }
+                AddAttendanceManager addAttendanceManager = new AddAttendanceManager();
+                addAttendanceManager.add_Attendance(Name, text1, 0);
+                Log.d("contest name", text1);
 //                !@#$
 //                int type = 0, expected_amount = 0;
 //                String deadline = "06:00:00";
