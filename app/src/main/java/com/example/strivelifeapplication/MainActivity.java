@@ -2,6 +2,7 @@ package com.example.strivelifeapplication;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -22,15 +23,19 @@ import com.example.strivelifeapplication.databinding.ActivityMainBinding;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoginDialog.ExampleDialogListener{
 
     private ActivityMainBinding binding;
+    String User_name, User_pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        requestWindowFeature(Window.FEATURE_NO_TITLE); // 隐藏标题栏
-        //hi
+        //login or register
+        LoginDialog Dialog = new LoginDialog();
+        Dialog.show(getSupportFragmentManager(), "Login Dialog");
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -45,7 +50,10 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
-
-
+    public void applyTexts(String username, String password) {
+        User_name = username;
+        User_pass = password;
+        Log.v("REGISTER_test", "ID:"+User_name+" PASS:"+User_pass);
+    }
 
 }
