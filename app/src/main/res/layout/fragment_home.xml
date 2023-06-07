@@ -23,6 +23,7 @@
                 android:id="@+id/avatar"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:src="@drawable/strivelife"
                 android:background="@drawable/circle_background"/>
 
             <TextView
@@ -30,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="還沒有名子"
+                android:text="marow"
                 android:textSize="20sp"
                 android:textColor="@color/black"
                 android:drawablePadding="8dp"

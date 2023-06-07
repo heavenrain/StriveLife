@@ -24,10 +24,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.strivelifeapplication.ContestDetailActivity;
+import com.example.strivelifeapplication.GetAttendedContestManager;
 import com.example.strivelifeapplication.R;
 import com.example.strivelifeapplication.UpdateavatarManager;
 import com.example.strivelifeapplication.databinding.FragmentNotificationsBinding;
 import com.example.strivelifeapplication.ui.home.HomeFragment;
+import com.example.strivelifeapplication.ui.home.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +37,8 @@ import java.util.List;
 import androidx.fragment.app.FragmentManager;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class NotificationsFragment extends Fragment {
 
@@ -203,18 +207,36 @@ public class NotificationsFragment extends Fragment {
     private List<String> generateDataList() {
         List<String> dataList = new ArrayList<>();
         // 添加数据项到列表中
-//        JSONArray data= getAttendedContest(使用者名稱);
-//        !@#$
-//        把JSONArray dataArray的比賽名稱加入dataList
+        GetAttendedContestManager AttendedContestManager = new GetAttendedContestManager();
+        JSONArray FriendData = AttendedContestManager.getAttendedContest(Name);
 
-        //!@#$
-        dataList.add("香菇湯意麵");
-        dataList.add("滷肉飯");
-        dataList.add("餛飩板條");
-        dataList.add("榨菜肉絲米粉");
-        dataList.add("香菇湯意麵");
-        dataList.add("豬肝麵");
-        dataList.add("高麗菜水餃");
+        for (int i = 0; i < FriendData.length(); i++) {
+            // 获取当前数组元素（一个 JSONObject）
+            JSONObject dataObject = null;
+            try {
+                dataObject = FriendData.getJSONObject(i);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+
+            // 从 dataObject 中获取 participant_name 和 score 值
+            String ContestName = null;
+            try {
+                String contestName = dataObject.getString("contest_name");
+                dataList.add(contestName);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+//        //!@#$
+//        dataList.add("香菇湯意麵");
+//        dataList.add("滷肉飯");
+//        dataList.add("餛飩板條");
+//        dataList.add("榨菜肉絲米粉");
+//        dataList.add("香菇湯意麵");
+//        dataList.add("豬肝麵");
+//        dataList.add("高麗菜水餃");
         return dataList;
     }
     private void openChangeAvatarDialog() {

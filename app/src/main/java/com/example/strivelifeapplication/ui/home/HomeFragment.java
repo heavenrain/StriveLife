@@ -101,39 +101,29 @@ public class HomeFragment extends Fragment {
             GetAttendedContestManager AttendedContestManager = new GetAttendedContestManager();
             JSONArray FriendData = AttendedContestManager.getAttendedContest(Name);
 
-//            for (int i = 0; i < FriendData.length(); i++) {
-//                // 获取当前数组元素（一个 JSONObject）
-//                JSONObject dataObject = null;
-//                try {
-//                    dataObject = FriendData.getJSONObject(i);
-//                } catch (JSONException e) {
-//                    throw new RuntimeException(e);
-//                }
-//
-//                // 从 dataObject 中获取 participant_name 和 score 值
-//                String ContestName = null;
-//                try {
-//                    contestName = dataObject.getString("contest_name");
-//                    contestType = Integer.parseInt(dataObject.getString("type"));
-////                    contestType = dataObject.getString("type");
-//                } catch (JSONException e) {
-//                    throw new RuntimeException(e);
-//                }
-//
-//                // 输出 ContestName
-//                Log.v("groupName: " , contestName);
-//            }
+            for (int i = 0; i < FriendData.length(); i++) {
+                // 获取当前数组元素（一个 JSONObject）
+                JSONObject dataObject = null;
+                try {
+                    dataObject = FriendData.getJSONObject(i);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
 
-            taskList = new ArrayList<>();
-            Task task = new Task("再睡五分鐘", 1, false, 0, null);
-            taskList.add(task);
-            task = new Task("健身大佬", 0, false, 0, null);
-            taskList.add(task);
-            task = new Task( "台南缺水", 1, false, 2000, null);
-            taskList.add(task);
+                // 从 dataObject 中获取 participant_name 和 score 值
+                String ContestName = null;
+                try {
+                    contestName = dataObject.getString("contest_name");
+                    contestType = Integer.parseInt(dataObject.getString("type"));
+                    expected_amount = Integer.parseInt(dataObject.getString("expected_amount"));
+                    Task task = new Task(contestName, contestType, false, expected_amount, null);
+                    taskList.add(task);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            homeViewModel.setAvatarName("strivelife");
             init_flag = false;
-            avatar = root.findViewById(R.id.avatar);  // Replace with your ImageView reference
-            avatar.setImageResource(AvatarNameToId("strivelife"));
         }
         else {
             taskList = homeViewModel.getTaskList();
