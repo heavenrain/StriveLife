@@ -1,5 +1,6 @@
 package com.example.strivelifeapplication.ui.notifications;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +8,12 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,7 +25,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.strivelifeapplication.ContestDetailActivity;
 import com.example.strivelifeapplication.R;
+import com.example.strivelifeapplication.UpdateavatarManager;
 import com.example.strivelifeapplication.databinding.FragmentNotificationsBinding;
+import com.example.strivelifeapplication.ui.home.HomeFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,15 +40,24 @@ public class NotificationsFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private MyAdapter adapter;
+    private List<Integer> imageList;
+
     private List<String> dataList;
 
     private FragmentNotificationsBinding binding;
+    private android.app.AlertDialog imagePickerDialog;
+    View view;
+    String Name;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
+        Name = "marow";
         View view = inflater.inflate(R.layout.fragment_notifications, container, false);
-
+        imageList = new ArrayList<>();
+        imageList.add(AvatarNameToId("water"));
+        imageList.add(AvatarNameToId("sleep"));
+        imageList.add(AvatarNameToId("muscle"));
+        imageList.add(AvatarNameToId("hero"));
 
         // 按下新增比賽按鈕
         Button new_game = view.findViewById(R.id.new_game);
@@ -122,7 +138,7 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // 在这里处理頭像按钮的点击事件
-                //!@#$
+                openChangeAvatarDialog();
                 Toast.makeText(getContext(), "頭像按鈕", Toast.LENGTH_SHORT).show();
             }
         });
@@ -200,6 +216,82 @@ public class NotificationsFragment extends Fragment {
         dataList.add("豬肝麵");
         dataList.add("高麗菜水餃");
         return dataList;
+    }
+    private void openChangeAvatarDialog() {
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(requireContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.change_avatar_window, null);
+        builder.setView(dialogView);
+        imagePickerDialog = builder.create();
+
+        GridView gridView = dialogView.findViewById(R.id.gridView);
+        ImageAdapter adapter = new ImageAdapter(requireContext(), imageList);
+        gridView.setAdapter(adapter);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int selectedImageResId = imageList.get(position);
+
+                // 儲存avatar圖片的名稱到HomeViewModel
+                String avatarName = AvatarIdToName(selectedImageResId);
+
+                // updata avatar 到 database
+                imagePickerDialog.dismiss();
+            }
+        });
+
+        imagePickerDialog.show();
+    }
+    private int AvatarNameToId(String Name) {
+        // Get the resource ID of the drawable using its name
+        int resourceId = getResources().getIdentifier(Name, "drawable", requireContext().getPackageName());
+        return resourceId;
+    }
+    private String AvatarIdToName(int resourceId) {
+        // Get the resource name of the drawable using its ID
+        String resourceName = getResources().getResourceEntryName(resourceId);
+        return resourceName;
+    }
+    public class ImageAdapter extends BaseAdapter {
+        private Context context;
+        private List<Integer> imageList;
+
+        public ImageAdapter(Context context, List<Integer> imageList) {
+            this.context = context;
+            this.imageList = imageList;
+        }
+
+        @Override
+        public int getCount() {
+            return imageList.size();
+        }
+
+        @Override
+        public Integer getItem(int position) {
+            return imageList.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ImageView imageView;
+
+            if (convertView == null) {
+                imageView = new ImageView(context);
+                imageView.setLayoutParams(new GridView.LayoutParams(120, 120));
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            } else {
+                imageView = (ImageView) convertView;
+            }
+
+            imageView.setImageResource(imageList.get(position));
+
+            return imageView;
+        }
     }
 
 

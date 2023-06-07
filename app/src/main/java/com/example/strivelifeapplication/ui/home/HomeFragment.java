@@ -23,6 +23,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.strivelifeapplication.GetAttendedContestManager;
+import com.example.strivelifeapplication.MainActivity;
+import com.example.strivelifeapplication.UpdateavatarManager;
 import com.example.strivelifeapplication.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
@@ -32,11 +35,15 @@ import com.example.strivelifeapplication.R;
 import com.example.strivelifeapplication.ui.dashboard.Friend;
 import com.example.strivelifeapplication.ui.dashboard.FriendAdapter;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    ArrayList<Task> taskList;
+    ArrayList<Task> taskList = new ArrayList<>();
     TaskAdapter taskAdapter = null;
     private ListView settingsListView;
     private boolean isSettingsVisible = false;
@@ -45,8 +52,10 @@ public class HomeFragment extends Fragment {
     private ImageView selectedImageView;
     HomeViewModel homeViewModel;
     View root;
-    boolean change_flag = false;
+    boolean init_flag = true;
     ImageView avatar;  // Replace with your ImageView reference
+    String Name;
+    String contestName;
 
 
 
@@ -81,7 +90,33 @@ public class HomeFragment extends Fragment {
 
         ListView listView = root.findViewById(R.id.listView1);
 
-        if (!change_flag){
+        if (init_flag){
+            homeViewModel.setMyName("marow");
+            Name = homeViewModel.getMyName();
+//            GetAttendedContestManager AttendedContestManager = new GetAttendedContestManager();
+//            JSONArray FriendData = AttendedContestManager.getAttendedContest(Name);
+//
+//            for (int i = 0; i < FriendData.length(); i++) {
+//                // 获取当前数组元素（一个 JSONObject）
+//                JSONObject dataObject = null;
+//                try {
+//                    dataObject = FriendData.getJSONObject(i);
+//                } catch (JSONException e) {
+//                    throw new RuntimeException(e);
+//                }
+//
+//                // 从 dataObject 中获取 participant_name 和 score 值
+//                String ContestName = null;
+//                try {
+//                    contestName = dataObject.getString("contest_name");
+//                } catch (JSONException e) {
+//                    throw new RuntimeException(e);
+//                }
+//
+//                // 输出 ContestName
+//                Log.v("groupName: " , contestName);
+            //}
+
             taskList = new ArrayList<>();
             Task task = new Task("再睡五分鐘", 1, false, 0, null);
             taskList.add(task);
@@ -89,9 +124,9 @@ public class HomeFragment extends Fragment {
             taskList.add(task);
             task = new Task( "台南缺水", 1, false, 2000, null);
             taskList.add(task);
-            change_flag = true;
+            init_flag = false;
             avatar = root.findViewById(R.id.avatar);  // Replace with your ImageView reference
-            avatar.setImageResource(AvatarNameToId("water"));
+            avatar.setImageResource(AvatarNameToId("strivelife"));
         }
         else {
             taskList = homeViewModel.getTaskList();
@@ -173,7 +208,10 @@ public class HomeFragment extends Fragment {
                 // 儲存avatar圖片的名稱到HomeViewModel
                 String avatarName = AvatarIdToName(selectedImageResId);
                 homeViewModel.setAvatarName(avatarName);
-                Log.d("圖", String.valueOf(avatarName));
+
+                // updata avatar 到 database
+                UpdateavatarManager updateavatarManager = new UpdateavatarManager();
+                updateavatarManager.updateAvatar(Name, avatarName);
                 imagePickerDialog.dismiss();
             }
         });

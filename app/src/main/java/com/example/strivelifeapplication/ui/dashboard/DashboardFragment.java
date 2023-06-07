@@ -16,11 +16,14 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.strivelifeapplication.GetFriendManager;
 import com.example.strivelifeapplication.MainActivity;
 import com.example.strivelifeapplication.databinding.FragmentDashboardBinding;
 import com.example.strivelifeapplication.R;
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import android.util.Log;
 import java.io.BufferedReader;
@@ -34,13 +37,15 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class DashboardFragment extends Fragment {
 
     private FragmentDashboardBinding binding;
     private ArrayList<Friend> friendList = new ArrayList<>();
     FriendAdapter friendAdapter = null;
     String result = null;
+    boolean init_flag = true;
+    String Name;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -49,11 +54,36 @@ public class DashboardFragment extends Fragment {
         DashboardViewModel dashboardViewModel =
                 new ViewModelProvider(this).get(DashboardViewModel.class);
 
+        if (init_flag) {
+            dashboardViewModel.setMyName("marow");
+            Name = dashboardViewModel.getMyName();
+            GetFriendManager FriendManager = new GetFriendManager();
+            JSONArray FriendData = FriendManager.getFriend(Name);
+            for (int i = 0; i < FriendData.length(); i++) {
+                // 获取当前数组元素（一个 JSONObject）
+                JSONObject dataObject = null;
+                try {
+                    dataObject = FriendData.getJSONObject(i);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
 
+                // 从 dataObject 中获取 participant_name 和 score 值
+                String friendname = null;
+                try {
+                    friendname = dataObject.getString("friend_name");
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+                Friend friend = new Friend(friendname, "無");
+                friendList.add(friend);
+            }
+            dashboardViewModel.updataFriendList(friendList);
+        }
         /////////////////////////////
-
-        friendList = dashboardViewModel.getFriendList();
-
+        else{
+            friendList = dashboardViewModel.getFriendList();
+        }
         friendAdapter = new FriendAdapter(requireContext(), R.layout.friend_info, friendList);
         ListView listView = root.findViewById(R.id.listView2);
         listView.setAdapter(friendAdapter);
