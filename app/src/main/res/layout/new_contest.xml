@@ -72,11 +72,20 @@
 
         <EditText
             android:id="@+id/contest_how_much"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/text_how_much"
             android:layout_marginStart="20dp"
-            android:hint="请输入需要達成量"
+            android:hint="请输入1達成量"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/contest_Unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/contest_how_much"
+            android:layout_marginStart="20dp"
+            android:hint="單位"
             android:textSize="16sp" />
 
     </RelativeLayout>
@@ -101,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/text_contest_time"
             android:layout_marginStart="20dp"
-            android:hint="06:00"
+            android:hint="例如:06:00"
             android:textSize="16sp" />
 
     </RelativeLayout>
