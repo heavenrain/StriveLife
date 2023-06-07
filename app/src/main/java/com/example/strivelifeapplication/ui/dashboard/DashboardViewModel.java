@@ -11,6 +11,8 @@ public class DashboardViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
     private ArrayList<Friend> friendList = new ArrayList<>();
+    String myName;
+
 
     public DashboardViewModel() {
         mText = new MutableLiveData<>();
@@ -19,6 +21,13 @@ public class DashboardViewModel extends ViewModel {
 
     public LiveData<String> getText() {
         return mText;
+    }
+    public void setMyName(String myName) {
+        this.myName = myName;
+    }
+
+    public String getMyName() {
+        return myName;
     }
 
     public ArrayList<Friend> getFriendList() {
