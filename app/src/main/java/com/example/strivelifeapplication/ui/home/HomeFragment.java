@@ -25,6 +25,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.strivelifeapplication.GetAttendedContestManager;
 import com.example.strivelifeapplication.MainActivity;
+import com.example.strivelifeapplication.UpdateavatarManager;
 import com.example.strivelifeapplication.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
@@ -92,29 +93,29 @@ public class HomeFragment extends Fragment {
         if (init_flag){
             homeViewModel.setMyName("marow");
             Name = homeViewModel.getMyName();
-            GetAttendedContestManager AttendedContestManager = new GetAttendedContestManager();
-            JSONArray FriendData = AttendedContestManager.getAttendedContest(Name);
-
-            for (int i = 0; i < FriendData.length(); i++) {
-                // 获取当前数组元素（一个 JSONObject）
-                JSONObject dataObject = null;
-                try {
-                    dataObject = FriendData.getJSONObject(i);
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-
-                // 从 dataObject 中获取 participant_name 和 score 值
-                String ContestName = null;
-                try {
-                    contestName = dataObject.getString("contest_name");
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-
-                // 输出 ContestName
-                Log.v("groupName: " , contestName);
-            }
+//            GetAttendedContestManager AttendedContestManager = new GetAttendedContestManager();
+//            JSONArray FriendData = AttendedContestManager.getAttendedContest(Name);
+//
+//            for (int i = 0; i < FriendData.length(); i++) {
+//                // 获取当前数组元素（一个 JSONObject）
+//                JSONObject dataObject = null;
+//                try {
+//                    dataObject = FriendData.getJSONObject(i);
+//                } catch (JSONException e) {
+//                    throw new RuntimeException(e);
+//                }
+//
+//                // 从 dataObject 中获取 participant_name 和 score 值
+//                String ContestName = null;
+//                try {
+//                    contestName = dataObject.getString("contest_name");
+//                } catch (JSONException e) {
+//                    throw new RuntimeException(e);
+//                }
+//
+//                // 输出 ContestName
+//                Log.v("groupName: " , contestName);
+            //}
 
             taskList = new ArrayList<>();
             Task task = new Task("再睡五分鐘", 1, false, 0, null);
@@ -207,7 +208,10 @@ public class HomeFragment extends Fragment {
                 // 儲存avatar圖片的名稱到HomeViewModel
                 String avatarName = AvatarIdToName(selectedImageResId);
                 homeViewModel.setAvatarName(avatarName);
-                Log.d("圖", String.valueOf(avatarName));
+
+                // updata avatar 到 database
+                UpdateavatarManager updateavatarManager = new UpdateavatarManager();
+                updateavatarManager.updateAvatar(Name, avatarName);
                 imagePickerDialog.dismiss();
             }
         });
