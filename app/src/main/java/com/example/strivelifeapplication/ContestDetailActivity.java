@@ -115,9 +115,9 @@ public class ContestDetailActivity extends AppCompatActivity {
 //        challengerItemList.add(new ChallengerItem("雷諾哈特", 10));
         challengerItemList.add(new ChallengerItem("萊西哈特", 15));
         challengerItemList.add(new ChallengerItem("萊特哈特", 8));
-//        challengerItemList.add(new ChallengerItem("梅露", 12));
-//        challengerItemList.add(new ChallengerItem("赫夫", 5));
-//        challengerItemList.add(new ChallengerItem("賽壬", 20));
+        challengerItemList.add(new ChallengerItem("梅露", 12));
+        challengerItemList.add(new ChallengerItem("赫夫", 5));
+        challengerItemList.add(new ChallengerItem("賽壬", 20));
         return challengerItemList;
     }
 
