@@ -12,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.strivelifeapplication.ui.ChallengerItem;
+import com.example.strivelifeapplication.ui.notifications.ChallengerAdapter;
+import com.example.strivelifeapplication.ui.notifications.ChallengerDecoration;
 import com.example.strivelifeapplication.ui.notifications.MyAdapter;
 
 import java.util.ArrayList;
@@ -34,15 +37,18 @@ public class ContestDetailActivity extends AppCompatActivity {
         // 声明并初始化RecyclerView
         RecyclerView recyclerView = findViewById(R.id.recyclerView_player);
 
-        List<String> dataList = generateDataList();
+        List<ChallengerItem> dataList = generateChallengerList();
 
         // 创建并设置适配器
-        MyAdapter adapter = new MyAdapter(dataList); // 假设dataList是您的人名数据列表
+        ChallengerAdapter adapter = new ChallengerAdapter(dataList);
         recyclerView.setAdapter(adapter);
 
         // 设置布局管理器
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // 調整間隙
+        int spacing = getResources().getDimensionPixelSize(R.dimen.item_spacing);
+        recyclerView.addItemDecoration(new ChallengerDecoration(spacing));
 
         // 设置返回按钮的点击事件
         Button backButton = findViewById(R.id.button_new_player);
@@ -66,7 +72,7 @@ public class ContestDetailActivity extends AppCompatActivity {
 
                         // 新增好友到比賽中(IF條件為如果建立成功)
                         if(true) {
-                            dataList.add(userInput);
+                            dataList.add(new ChallengerItem(userInput, 0));
                             adapter.updateData(dataList);
                         }
                     }
@@ -91,16 +97,16 @@ public class ContestDetailActivity extends AppCompatActivity {
 
 
     // 要求後端生成參與比賽玩家数据列表的方法
-    private List<String> generateDataList() {
-        List<String> dataList = new ArrayList<>();
+    private List<ChallengerItem> generateChallengerList() {
+        List<ChallengerItem> challengerItemList = new ArrayList<>();
         // 添加数据项到列表中
-        dataList.add("雷諾哈特");
-        dataList.add("萊西哈特");
-        dataList.add("萊特哈特");
-        dataList.add("梅露");
-        dataList.add("赫夫");
-        dataList.add("賽壬");
-        return dataList;
+        challengerItemList.add(new ChallengerItem("雷諾哈特", 10));
+        challengerItemList.add(new ChallengerItem("萊西哈特", 15));
+        challengerItemList.add(new ChallengerItem("萊特哈特", 8));
+        challengerItemList.add(new ChallengerItem("梅露", 12));
+        challengerItemList.add(new ChallengerItem("赫夫", 5));
+        challengerItemList.add(new ChallengerItem("賽壬", 20));
+        return challengerItemList;
     }
 
 }
