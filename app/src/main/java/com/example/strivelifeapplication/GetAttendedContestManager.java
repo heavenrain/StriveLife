@@ -88,10 +88,21 @@ public class GetAttendedContestManager {
                         JSONObject dataObject = dataArray.getJSONObject(i);
 
                         // 从 dataObject 中获取 participant_name 和 score 值
-                        String ContestName = dataObject.getString("contest_name");
+                        String deadline = dataObject.getString("deadline");
+                        String award_name = dataObject.getString("award_name");
+                        String award_avatar = dataObject.getString("award_avatar");
+
+                        int type = dataObject.getInt("type");
+                        int expected_amount = dataObject.getInt("expected_amount");
+                        int award_score = dataObject.getInt("award_score");
 
                         // 输出 participant_name 和 score
-                        Log.v("ContestName: " , ""+ ContestName);
+                        Log.v("type: " , ""+ type);
+                        Log.v("deadline: " , ""+ deadline);
+                        Log.v("expected_amount: " , ""+ expected_amount);
+                        Log.v("award_name: " , ""+ award_name);
+                        Log.v("award_score: " , ""+ award_score);
+                        Log.v("award_avatar: " , ""+ award_avatar);
 
                         // 在此处可以根据需要将 participant_name 和 score 存入你的 HashMap
                     }
