@@ -27,6 +27,8 @@ import java.util.List;
 
 import androidx.fragment.app.FragmentManager;
 
+import org.json.JSONArray;
+
 public class NotificationsFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -96,7 +98,7 @@ public class NotificationsFragment extends Fragment {
     }
 
 
-    // 顯示新建比賽頁面函數
+    // 顯示新建比賽頁面
     private void showInputDialog() {
         // 创建AlertDialog的Builder对象
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -111,6 +113,19 @@ public class NotificationsFragment extends Fragment {
         EditText contest_success = dialogView.findViewById(R.id.contest_success);
         EditText contest_how_much = dialogView.findViewById(R.id.contest_how_much);
         EditText contest_time = dialogView.findViewById(R.id.contest_time);
+
+        // 選擇頭像獎勵按鈕
+        Button extraButton = dialogView.findViewById(R.id.button_new_aword);
+
+        // 设置頭像按钮的点击事件
+        extraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 在这里处理頭像按钮的点击事件
+                //!@#$
+                Toast.makeText(getContext(), "頭像按鈕", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         // 设置对话框的积极按钮（例如确定按钮）
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -155,6 +170,9 @@ public class NotificationsFragment extends Fragment {
     private List<String> generateDataList() {
         List<String> dataList = new ArrayList<>();
         // 添加数据项到列表中
+//        JSONArray data= getAttendedContest("sally");//
+//        @NonNull
+//                @NonNull
         dataList.add("香菇湯意麵");
         dataList.add("滷肉飯");
         dataList.add("餛飩板條");
