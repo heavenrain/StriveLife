@@ -1,6 +1,6 @@
 # StriveLife APP
 Strive for a better Life
-[Presentation Slide](https://drive.google.com/file/d/1jkqYZkJ4xQWtfatLdBt8soHQ5vqtM5UK/view?usp=sharing)
+[(Presentation Slide)](https://drive.google.com/file/d/1jkqYZkJ4xQWtfatLdBt8soHQ5vqtM5UK/view?usp=sharing)
 
 ---
 
